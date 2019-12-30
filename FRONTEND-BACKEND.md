@@ -1,9 +1,23 @@
 # FRONTEND BUILD PREPRATION.
-Create the production version build of your frontend application using the command
+
+Create a React component that fetches data from server.
+```
+import React, { useEffect } from 'react';
+function App(){
+    useEffect(() => {
+        fetch("http://localhost:3001").then(res=>res.json()).then(data=>console.log(data))	
+    },[]);
+    return("Front End");
+}
+
+export default App
+```
+
+Next create the production version build of your frontend application using the command
 ```
 npm run build
 ```
-Create a folder named react-app inside /var/www<br/>
+Create a folder named react-app inside /var/www/<br/>
 Copy the contents from build folder to react-app folder(/var/www/react-app)
 
 
@@ -18,6 +32,7 @@ const port =  process.argv[2] || 3000;
 const server = http.createServer((req, res) => {
 	res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader("Access-Control-Allow-Origin", "*");
     res.end(JSON.stringify({ port: port,host:'localhost'}));
 });
 server.listen(port, hostname, () => {
