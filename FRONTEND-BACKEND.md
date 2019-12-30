@@ -1,6 +1,7 @@
 # FRONTEND BUILD PREPRATION.
 Create the production version build of your frontend application using the command
-```npm run build
+```
+npm run build
 ```
 Create a folder named react-app inside /var/www<br/>
 Copy the contents from build folder to react-app folder(/var/www/react-app)
@@ -64,7 +65,8 @@ node app.js 3002
 ```
 
 Reload the Nginx server
-```systemctl reload nginx
+```
+systemctl reload nginx
 ```
 Visit localhost:80 to see your application running integrated with backend.<br/>
 
