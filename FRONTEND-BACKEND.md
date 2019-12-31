@@ -5,7 +5,7 @@ Create a React component that fetches data from server.
 import React, { useEffect } from 'react';
 function App(){
     useEffect(() => {
-        fetch("http://localhost:3001").then(res=>res.json()).then(data=>console.log(data))	
+        fetch("http://localhost:3000").then(res=>res.json()).then(data=>console.log(data))	
     },[]);
     return("Front End");
 }
