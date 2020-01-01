@@ -45,8 +45,6 @@ nano /var/www/test.com/html/index.html
 ```
 Modify it with below code
 ```
-/var/www/test.com/html/index.html
-
 <html>
     <head>
         <title>Welcome to Test.com!</title>
@@ -57,3 +55,62 @@ Modify it with below code
 </html>
 ```
 We now have some pages to display to visitors of our two domains.
+
+# Step Three: Create Server Block Files for Each Domain
+
+# Create the First Server Block File
+Only one of our server blocks on the server can have the default_server option enabled. <br/>
+This specifies which block should serve a request if the server_name requested does not match any of the available server blocks.<br/>
+
+You can choose to designate one of your sites as the “default” by including the default_server option in the listen directive, or you can leave the default server block enabled, which will serve the content of the /var/www/html directory if the requested host cannot be found.
+
+<br/>You can check that the default_server option is only enabled in a single active file by typing:
+```
+grep -R default_server /etc/nginx/sites-enabled/
+```
+If matches are found uncommented in more than on file (shown in the leftmost column), Nginx will complain about an invalid configuration.
+
+<br/>Now Create the config for First domain example.com
+
+```
+sudo nano /etc/nginx/sites-available/example.com
+```
+Add Below code to the file
+
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/example.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name example.com www.example.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
+
+# Create the Second Server Block File
+Create the config file for second domain.
+```
+sudo nano /etc/nginx/sites-available/test.com
+```
+Add Below code to the file
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/test.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name test.com www.test.com;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
