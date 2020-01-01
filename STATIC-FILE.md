@@ -53,4 +53,21 @@ location /images {
     try_files $uri =404;
 }
 ```
-which means either serve the file or serve a 404 error, you can't use only $uri by it self without =404 because you need to have a fallback option.
+which means either serve the file or serve a 404 error, you can't use only $uri by it self without =404 because you need to have a fallback option.<br/>
+
+
+# Trying Several Options
+The try_files directive can be used to check whether the specified file or directory exists; NGINX makes an internal redirect if it does, or returns a specified status code if it doesn’t. 
+```
+server {
+    root /www/data;
+
+    location /images/ {
+        try_files $uri /images/default.gif;
+    }
+}
+```
+The file is specified in the form of the URI, which is processed using the root.
+For example, in response to the http://localhost/images/example.png request nginx will check if inside images folder example.png exists if yes then it send the /www/data/images/example.png file.<br/><br/>
+
+If the file corresponding to the original URI doesn’t exist, NGINX makes an internal redirect to the URI  specified as fallback, returning /www/data/images/default.gif.
