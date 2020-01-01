@@ -137,3 +137,36 @@ restart Nginx to enable your changes, Nginx should now be serving both of your d
 ```
 sudo systemctl restart nginx
 ```
+
+
+# Step Five: Modify Your Local Hosts File for Testing(Optional)
+If not using domain names that you own and instead have been using dummy values, you can modify your local computer’s configuration to let you to temporarily test your Nginx server block configuration.
+
+```
+sudo nano /etc/hosts
+```
+
+Append below lines to file opened and should look something like this:
+
+```
+127.0.0.1   localhost
+. . .
+
+127.0.0.1       www.example.com example.com
+127.0.0.1       www.test.com test.com
+```
+Save and close the file when you are finished.<br/>
+This will intercept any requests for example.com and test.com and send them to your server.<br/>
+which is what we want if we don’t actually own the domains that we are using.
+
+# Step Six: Test your Results
+
+Test that your server blocks are functioning correctly. You can do that by visiting the domains in your web browser:
+```
+http://example.com
+http://test.com
+```
+
+If both of these sites work, you have successfully configured two independent server blocks with Nginx.<br/>
+
+Note *  If you adjusted your hosts file on your local computer in order to test, you’ll probably want to remove the lines you added, when you own your actual domain.
