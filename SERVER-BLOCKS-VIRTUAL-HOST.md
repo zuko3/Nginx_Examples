@@ -114,3 +114,26 @@ server {
         }
 }
 ```
+
+# Step Four: Enable your Server Blocks and Restart Nginx
+Now we need to enable server blocks, We can do this by creating symbolic links from these files to the sites-enabled directory, which Nginx reads from during startup.
+
+```
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/test.com /etc/nginx/sites-enabled/
+```
+
+example.com: Will respond to requests for example.com and www.example.com<br/>
+test.com: Will respond to requests for test.com and www.test.com<br/>
+default: Will respond to any requests on port 80 that do not match the other two blocks.<br/>
+
+Test to make sure that there are no syntax errors in any of your Nginx files
+```
+sudo nginx -t
+```
+
+restart Nginx to enable your changes, Nginx should now be serving both of your domain names
+
+```
+sudo systemctl restart nginx
+```
