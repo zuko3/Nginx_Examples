@@ -7,8 +7,8 @@ This works well for a single site, we need additional directories if we’re goi
 We will create a directory structure within /var/www for each of our sites.<br/>
 We need to create these directories for each of our sites. The -p flag tells mkdir to create any necessary parent directories along the way:
 ```
-    sudo mkdir -p /var/www/example.com/html
-    sudo mkdir -p /var/www/test.com/html
+sudo mkdir -p /var/www/example.com/html
+sudo mkdir -p /var/www/test.com/html
 ```
 
 The Assign proper permissions of our web roots
